@@ -259,6 +259,7 @@
 #define TLV_TYPE_MAX_SEND_SPEED_LARGE 323
 #define TLV_TYPE_MAX_RECV_SPEED_LARGE 324
 #define TLV_TYPE_TIMEVALUE_LARGE 325
+#define TLV_TYPE_DUP_HANDLE     326
 
 /**
  * TLV function return codes.

@@ -129,6 +129,9 @@ def generate_corpus(args: argparse.Namespace) -> None:
             for mimepart in args.mimepart:
                 enc.write_mimepart(mimepart)
 
+        if args.dup_handle:
+            enc.write_bytes(enc.TYPE_DUP_HANDLE,args.dup_handle_options)
+
 
 def main() -> None:
     """Main function"""
@@ -170,6 +173,9 @@ def main() -> None:
     parser.add_argument("--connectonly", type=int)
     parser.add_argument("--post", action="store_true")
     parser.add_argument("--hsts")
+
+    parser.add_argument('--dup-handle', action='store_true',
+                    help='Add a duplicate handle TLV')
 
     upload1 = parser.add_mutually_exclusive_group()
     upload1.add_argument("--upload1")

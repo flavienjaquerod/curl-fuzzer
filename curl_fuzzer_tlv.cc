@@ -199,6 +199,15 @@ int fuzz_parse_tlv(FUZZ_DATA *fuzz, TLV *tlv)
       FSET_OPTION(fuzz, CURLOPT_HTTPPOST, fuzz->httppost);
       break;
 
+    case TLV_TYPE_DUP_HANDLE: {
+      CURL *duplicate = curl_easy_duphandle(fuzz->easy);
+      FCHECK(duplicate != NULL);
+      curl_easy_cleanup(fuzz->easy);
+      fuzz->easy = duplicate;
+      break;
+    }
+    
+
     /* Define a set of u32 options. */
     FU32TLV(fuzz, TLV_TYPE_HTTPAUTH, CURLOPT_HTTPAUTH);
     FU32TLV(fuzz, TLV_TYPE_OPTHEADER, CURLOPT_HEADER);
@@ -410,6 +419,8 @@ int fuzz_parse_tlv(FUZZ_DATA *fuzz, TLV *tlv)
     FSINGLETONTLV(fuzz, TLV_TYPE_REDIR_PROTOCOLS_STR, CURLOPT_REDIR_PROTOCOLS_STR);
     FSINGLETONTLV(fuzz, TLV_TYPE_HAPROXY_CLIENT_IP, CURLOPT_HAPROXY_CLIENT_IP);
     FSINGLETONTLV(fuzz, TLV_TYPE_ECH, CURLOPT_ECH);
+
+
     default:
       /* The fuzzer generates lots of unknown TLVs - we don't want these in the
          corpus so we reject any unknown TLVs. */

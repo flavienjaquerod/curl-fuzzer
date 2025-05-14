@@ -65,6 +65,7 @@ class BaseType(object):
     TYPE_CONNECT_ONLY = 50
     TYPE_HSTS = 51
     TYPE_HTTPPOSTBODY = 52  # https://curl.se/libcurl/c/CURLOPT_HTTPPOST.html
+    TYPE_DUP_HANDLE = 356
 
     TYPEMAP = {
         TYPE_URL: "CURLOPT_URL",
@@ -119,6 +120,7 @@ class BaseType(object):
         TYPE_CONNECT_ONLY: "CURLOPT_CONNECT_ONLY",
         TYPE_HSTS: "CURLOPT_HSTS",
         TYPE_HTTPPOSTBODY: "CURLOPT_HTTPPOST",
+        TYPE_DUP_HANDLE: "CURLOPT_DUP_HANDLE",
     }
 
 
